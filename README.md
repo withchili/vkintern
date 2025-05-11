@@ -36,9 +36,7 @@ message Event            { string data = 1; }
 Код генерируется командой:
 
 ```bash
-protoc --go_out=. --go_opt=paths=source_relative \
-       --go-grpc_out=. --go-grpc_opt=paths=source_relative \
-       service.proto
+protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative service.proto
 ```
 
 Файлы `*.pb.go` уже находятся в репозитории, поэтому `protoc` запускать не обязательно.
@@ -72,15 +70,13 @@ shutdown_timeout: 5s    # Таймаут корректного завершен
 ### Публикация
 
 ```bash
-grpcurl -plaintext -d '{"key":"news","data":"hello"}' \
-  localhost:50051 pubsub.PubSub/Publish
+grpcurl -plaintext -d '{"key":"news","data":"hello"}' localhost:50051 pubsub.PubSub/Publish
 ```
 
 ### Подписка (стрим)
 
 ```bash
-grpcurl -plaintext -d '{"key":"news"}' \
-  localhost:50051 pubsub.PubSub/Subscribe
+grpcurl -plaintext -d '{"key":"news"}' localhost:50051 pubsub.PubSub/Subscribe
 ```
 
 ### Отписка от стрима
